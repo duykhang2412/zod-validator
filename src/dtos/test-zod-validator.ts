@@ -1,3 +1,4 @@
+import { Role } from '../enums/role.enum';
 import { z } from 'zod';
 
 export const testZodDto = z.object({
@@ -41,6 +42,10 @@ export const testZodDto = z.object({
         }).positive({
             message: 'age must be a positive number',
         }).int().min(1).max(100),
+    }),
+    checkRole: z.nativeEnum(Role, {
+        invalid_type_error: 'checkRole must be either ADMIN or USER',
+        required_error: 'checkRole is required',
     }),
 })
 export const validateTestZodDto = (body: any) => {
